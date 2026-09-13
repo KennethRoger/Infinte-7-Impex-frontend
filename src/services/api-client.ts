@@ -1,0 +1,118 @@
+import { ENV } from '../config/env';
+import type { ApiResponse } from '../types/api';
+
+export class ApiRequestError extends Error {
+  statusCode: number;
+  codeMsg?: string;
+  details: Array<{ field: string; message: string }>;
+
+  constructor(
+    message: string,
+    statusCode: number,
+    codeMsg?: string,
+    details: Array<{ field: string; message: string }> = []
+  ) {
+    super(message);
+    this.name = 'ApiRequestError';
+    this.statusCode = statusCode;
+    this.codeMsg = codeMsg;
+    this.details = details;
+  }
+}
+
+interface RequestOptions extends RequestInit {
+  params?: Record<string, string | number | boolean | undefined>;
+  token?: string;
+}
+
+/**
+ * Generic type-safe API client
+ */
+export async function apiRequest<T>(
+  endpoint: string,
+  options: RequestOptions = {}
+): Promise<ApiResponse<T>> {
+  const { params, token, headers, ...customConfig } = options;
+
+  let url = endpoint.startsWith('http') ? endpoint : `${ENV.API_BASE_URL}${endpoint}`;
+
+  if (params) {
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== '') {
+        searchParams.append(key, String(value));
+      }
+    });
+    const queryString = searchParams.toString();
+    if (queryString) {
+      url += (url.includes('?') ? '&' : '?') + queryString;
+    }
+  }
+
+  const defaultHeaders: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+
+  const storedToken = token || (typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null);
+  if (storedToken) {
+    defaultHeaders['Authorization'] = `Bearer ${storedToken}`;
+  }
+
+  const response = await fetch(url, {
+    headers: {
+      ...defaultHeaders,
+      ...(headers as Record<string, string>),
+    },
+    ...customConfig,
+  });
+
+  let data: ApiResponse<T>;
+  try {
+    data = await response.json();
+  } catch {
+    throw new ApiRequestError(
+      `Failed to parse response: ${response.statusText}`,
+      response.status
+    );
+  }
+
+  if (!response.ok || !data.success) {
+    throw new ApiRequestError(
+      data.message || 'An unexpected error occurred',
+      response.status,
+      data.error?.codeMsg,
+      data.error?.details || []
+    );
+  }
+
+  return data;
+}
+
+export const api = {
+  get: <T>(endpoint: string, options?: RequestOptions) =>
+    apiRequest<T>(endpoint, { method: 'GET', ...options }),
+
+  post: <T>(endpoint: string, body: unknown, options?: RequestOptions) =>
+    apiRequest<T>(endpoint, {
+      method: 'POST',
+      body: JSON.stringify(body),
+      ...options,
+    }),
+
+  put: <T>(endpoint: string, body: unknown, options?: RequestOptions) =>
+    apiRequest<T>(endpoint, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+      ...options,
+    }),
+
+  patch: <T>(endpoint: string, body: unknown, options?: RequestOptions) =>
+    apiRequest<T>(endpoint, {
+      method: 'PATCH',
+      body: JSON.stringify(body),
+      ...options,
+    }),
+
+  delete: <T>(endpoint: string, options?: RequestOptions) =>
+    apiRequest<T>(endpoint, { method: 'DELETE', ...options }),
+};
