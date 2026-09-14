@@ -1,43 +1,55 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import logoBgRemoved from '../../assets/logo_bg_removed.png';
+import { useRouter, Link } from '../../context/RouterContext';
 
 export const Navbar: React.FC = () => {
+  const { currentPath, navigate } = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: 'Home', href: '#home', active: true },
-    { label: 'Products', href: '#products' },
-    { label: 'Export Process', href: '#process' },
-    { label: 'Countries', href: '#countries' },
-    { label: 'About', href: '#about' },
-    { label: 'Blog', href: '#blog' },
+    { label: 'Home', href: '/', active: currentPath === '/' },
+    { label: 'Products', href: '/products', active: currentPath === '/products' },
+    { label: 'Export Process', href: '/export-process', active: currentPath === '/export-process' },
+    { label: 'Countries', href: '/countries', active: currentPath === '/countries' },
+    { label: 'About', href: '/about', active: currentPath === '/about' },
+    { label: 'Blog', href: '/blog', active: currentPath === '/blog' },
   ];
 
   const handleScrollToQuote = () => {
     setMobileMenuOpen(false);
-    const element = document.getElementById('get-quote');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (currentPath === '/') {
+      const element = document.getElementById('get-quote');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
     }
+    navigate('/#get-quote');
+    setTimeout(() => {
+      const element = document.getElementById('get-quote');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b border-[#E7DFD3]/80 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-22 flex items-center justify-between">
         {/* Brand Logo */}
-        <a href="#home" className="shrink-0 flex items-center py-1">
+        <Link href="/" className="shrink-0 flex items-center py-1">
           <img
             src={logoBgRemoved}
             alt="Infinite 7 Impex"
             className="h-14 sm:h-16 w-auto object-contain drop-shadow-sm transition-transform hover:scale-105"
           />
-        </a>
+        </Link>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-7 lg:gap-9 text-[14px] font-medium text-slate-700">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.label}
               href={link.href}
               className={`transition-colors duration-150 relative py-1 ${
@@ -47,7 +59,7 @@ export const Navbar: React.FC = () => {
               }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -80,7 +92,7 @@ export const Navbar: React.FC = () => {
         <div className="md:hidden bg-white border-b border-[#E7DFD3] px-6 py-5 space-y-4 shadow-lg animate-in slide-in-from-top-2 duration-200">
           <nav className="flex flex-col space-y-3 text-base font-medium text-slate-800">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
@@ -89,7 +101,7 @@ export const Navbar: React.FC = () => {
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
           <div className="pt-2">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import footerLogo from '../../assets/Logo.jpeg';
+import { Link } from '../../context/RouterContext';
 
 export const Footer: React.FC = () => {
   return (
@@ -34,39 +35,39 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2.5 text-sm font-medium">
               <li>
-                <a href="#home" className="hover:text-[#D4902A] transition-colors">
+                <Link href="/" className="hover:text-[#D4902A] transition-colors">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#products" className="hover:text-[#D4902A] transition-colors">
+                <Link href="/products" className="hover:text-[#D4902A] transition-colors">
                   Products
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#process" className="hover:text-[#D4902A] transition-colors">
+                <Link href="/export-process" className="hover:text-[#D4902A] transition-colors">
                   Export Process
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#countries" className="hover:text-[#D4902A] transition-colors">
+                <Link href="/countries" className="hover:text-[#D4902A] transition-colors">
                   Countries
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#about" className="hover:text-[#D4902A] transition-colors">
+                <Link href="/about" className="hover:text-[#D4902A] transition-colors">
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#blog" className="hover:text-[#D4902A] transition-colors">
+                <Link href="/blog" className="hover:text-[#D4902A] transition-colors">
                   Blog
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#get-quote" className="hover:text-[#D4902A] transition-colors">
+                <Link href="/#get-quote" className="hover:text-[#D4902A] transition-colors">
                   Customer Enquiry
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

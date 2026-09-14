@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '../../context/RouterContext';
 
 interface ProcessStep {
   number: string;
@@ -16,7 +17,7 @@ export const ExportProcessSection: React.FC = () => {
   ];
 
   return (
-    <section id="process" className="py-24 bg-[#153323] text-white">
+    <section id="process" className="py-20 bg-[#0E2318] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Header with Title and Button */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
@@ -29,12 +30,12 @@ export const ExportProcessSection: React.FC = () => {
             </h2>
           </div>
 
-          <a
-            href="#process"
+          <Link
+            href="/export-process"
             className="inline-flex items-center justify-center border border-white/80 hover:bg-white/10 text-white px-5 py-2.5 rounded-md text-xs sm:text-sm font-semibold transition-colors shrink-0"
           >
             See Full Process
-          </a>
+          </Link>
         </div>
 
         {/* Stepper Timeline Container */}
