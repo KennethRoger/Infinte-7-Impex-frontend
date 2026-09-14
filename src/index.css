@@ -2,15 +2,37 @@
 
 @layer base {
   :root {
-    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-heading: 'Outfit', 'Inter', system-ui, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', Times, serif;
+    --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   body {
     font-family: var(--font-sans);
+    background-color: #FAF7F2;
+    color: #1A221E;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
+  h1, h2, h3, .font-editorial {
+    font-family: var(--font-serif);
   }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4C9BC;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B5A898;
 }
