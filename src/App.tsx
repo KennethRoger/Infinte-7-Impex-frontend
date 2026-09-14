@@ -3,6 +3,7 @@ import { RouterProvider, useRouter } from './context/RouterContext';
 import { Navbar } from './components/layout/Navbar';
 import { HomePage } from './pages/HomePage';
 import { ExportProcessPage } from './pages/ExportProcessPage';
+import { CountriesPage } from './pages/CountriesPage';
 import { Footer } from './components/layout/Footer';
 
 const AppContent: React.FC = () => {
@@ -12,6 +13,8 @@ const AppContent: React.FC = () => {
     switch (currentPath) {
       case '/export-process':
         return <ExportProcessPage />;
+      case '/countries':
+        return <CountriesPage />;
       case '/':
       default:
         return <HomePage />;

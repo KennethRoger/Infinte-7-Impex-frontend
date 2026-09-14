@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from '../../context/RouterContext';
 
 interface CountryMarket {
   name: string;
@@ -31,13 +32,13 @@ export const MarketsSection: React.FC = () => {
             </h2>
           </div>
 
-          <a
-            href="#countries"
+          <Link
+            href="/countries"
             className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-[#C88A2C] transition-colors shrink-0"
           >
             <span>View All Markets</span>
             <ArrowRight className="w-3.5 h-3.5" />
-          </a>
+          </Link>
         </div>
 
         {/* Markets Cards Grid */}
