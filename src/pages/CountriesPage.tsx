@@ -45,8 +45,8 @@ export const CountriesPage: React.FC = () => {
           <span className="text-xs font-bold uppercase tracking-widest text-[#22C55E] block">
             GLOBAL REACH
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-tight leading-tight uppercase">
-            OUR EXPORT MARKETS
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-tight leading-tight">
+            Our Export Markets
           </h1>
           <p className="text-slate-300 text-sm sm:text-base max-w-2xl pt-1 leading-relaxed font-normal">
             From Indian farms to international markets — we currently export to Sri Lanka, Singapore,

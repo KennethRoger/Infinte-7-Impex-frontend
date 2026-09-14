@@ -4,7 +4,7 @@ export const CreateProductSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   description: z.string().optional(),
   images: z
-    .array(z.string().url('Image must be a valid URL'))
+    .array(z.url('Image must be a valid URL'))
     .min(1, 'At least one image is required'),
   category: z
     .string()
@@ -19,8 +19,8 @@ export type UpdateProductDto = z.infer<typeof UpdateProductSchema>;
 export const ProductSchema = CreateProductSchema.extend({
   _id: z.string(),
   isRemoved: z.boolean().default(false),
-  createdAt: z.string().datetime().optional(),
-  updatedAt: z.string().datetime().optional(),
+  createdAt: z.iso.datetime().optional(),
+  updatedAt: z.iso.datetime().optional(),
 });
 
 export type Product = z.infer<typeof ProductSchema>;

@@ -26,8 +26,8 @@ export type UpdateBlogDto = z.infer<typeof UpdateBlogSchema>;
 
 export const BlogSchema = CreateBlogSchema.extend({
   _id: z.string(),
-  createdAt: z.string().datetime().optional(),
-  updatedAt: z.string().datetime().optional(),
+  createdAt: z.iso.datetime().optional(),
+  updatedAt: z.iso.datetime().optional(),
 });
 
 export type Blog = z.infer<typeof BlogSchema>;
@@ -36,9 +36,9 @@ export const BlogSummarySchema = z.object({
   _id: z.string(),
   title: z.string(),
   description: z.string(),
-  image: z.string().url().optional(),
-  createdAt: z.string().datetime().optional(),
-  updatedAt: z.string().datetime().optional(),
+  image: z.url().optional(),
+  createdAt: z.iso.datetime().optional(),
+  updatedAt: z.iso.datetime().optional(),
 });
 
 export type BlogSummary = z.infer<typeof BlogSummarySchema>;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, MessageSquare } from 'lucide-react';
+import { Link } from '../../context/RouterContext';
 
 export const PromiseSection: React.FC = () => {
   const handleScrollToQuote = () => {
@@ -17,13 +18,13 @@ export const PromiseSection: React.FC = () => {
               <span className="text-xs font-bold uppercase tracking-widest text-[#C88A2C]">
                 Why Infinite 7 Impex
               </span>
-              <a
-                href="#about"
+              <Link
+                href="/about"
                 className="text-xs font-semibold text-slate-600 hover:text-[#C88A2C] inline-flex items-center gap-1 transition-colors"
               >
                 <span>Learn More About Us</span>
                 <ArrowRight className="w-3 h-3" />
-              </a>
+              </Link>
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1A221E] font-serif leading-[1.2]">

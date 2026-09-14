@@ -24,8 +24,8 @@ export const CustomerSchema = CreateCustomerSchema.extend({
   priority: CustomerPriorityEnum.default('unset'),
   isActive: z.boolean().default(true),
   notes: z.string().default(''),
-  createdAt: z.string().datetime().optional(),
-  updatedAt: z.string().datetime().optional(),
+  createdAt: z.iso.datetime().optional(),
+  updatedAt: z.iso.datetime().optional(),
 });
 
 export type Customer = z.infer<typeof CustomerSchema>;

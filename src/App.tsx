@@ -4,6 +4,7 @@ import { Navbar } from './components/layout/Navbar';
 import { HomePage } from './pages/HomePage';
 import { ExportProcessPage } from './pages/ExportProcessPage';
 import { CountriesPage } from './pages/CountriesPage';
+import { AboutPage } from './pages/AboutPage';
 import { Footer } from './components/layout/Footer';
 
 const AppContent: React.FC = () => {
@@ -15,6 +16,8 @@ const AppContent: React.FC = () => {
         return <ExportProcessPage />;
       case '/countries':
         return <CountriesPage />;
+      case '/about':
+        return <AboutPage />;
       case '/':
       default:
         return <HomePage />;
