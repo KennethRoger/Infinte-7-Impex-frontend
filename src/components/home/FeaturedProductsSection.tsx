@@ -12,7 +12,7 @@ export const FeaturedProductsSection: React.FC = () => {
       image: onionImg,
       description:
         'Red onions are globally recognised for their pungency, long shelf life, and consistent sizing. Sourced directly from the Lasalgaon mandi in Nashik.',
-      detailsLink: '/products/fresh-vegetables',
+      detailsLink: '/products/fresh-vegetables/onion',
     },
     {
       name: 'Green Chilli',

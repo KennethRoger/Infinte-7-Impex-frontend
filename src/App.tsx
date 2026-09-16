@@ -4,6 +4,7 @@ import { Navbar } from './components/layout/Navbar';
 import { HomePage } from './pages/HomePage';
 import { ProductsPage } from './pages/ProductsPage';
 import { FreshVegetablesPage } from './pages/FreshVegetablesPage';
+import { ProductDetailPage } from './pages/ProductDetailPage';
 import { ExportProcessPage } from './pages/ExportProcessPage';
 import { CountriesPage } from './pages/CountriesPage';
 import { AboutPage } from './pages/AboutPage';
@@ -13,6 +14,13 @@ const AppContent: React.FC = () => {
   const { currentPath } = useRouter();
 
   const renderCurrentPage = () => {
+    if (
+      currentPath === '/products/fresh-vegetables/onion' ||
+      currentPath === '/products/onion'
+    ) {
+      return <ProductDetailPage />;
+    }
+
     if (currentPath === '/products/fresh-vegetables') {
       return <FreshVegetablesPage />;
     }

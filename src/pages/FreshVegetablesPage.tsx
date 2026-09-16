@@ -52,6 +52,14 @@ export const FreshVegetablesPage: React.FC = () => {
     }, 100);
   };
 
+  const handleProductClick = (slug: string) => {
+    if (slug === 'red-onion' || slug === 'onion') {
+      navigate('/products/fresh-vegetables/onion');
+    } else {
+      handleScrollToQuote();
+    }
+  };
+
   return (
     <div className="w-full bg-[#FAF7F2] min-h-screen">
       {/* 1. Dark Emerald Hero Header */}
@@ -116,7 +124,7 @@ export const FreshVegetablesPage: React.FC = () => {
                 <div className="pt-2">
                   <button
                     type="button"
-                    onClick={handleScrollToQuote}
+                    onClick={() => handleProductClick(product.slug)}
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#1A221E] group/btn hover:text-[#C88A2C] transition-colors cursor-pointer"
                   >
                     <span>View Details</span>
