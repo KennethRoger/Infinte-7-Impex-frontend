@@ -26,8 +26,15 @@ import { AdminProductsPage } from './pages/admin/AdminProductsPage';
 import { AdminBlogsPage } from './pages/admin/AdminBlogsPage';
 
 const AppContent: React.FC = () => {
-  const { currentPath } = useRouter();
+  const { currentPath, navigate } = useRouter();
   const { isAuthenticated, isLoading } = useAuth();
+
+  // Redirect to /admin/login if attempting to access any protected admin route while unauthenticated
+  React.useEffect(() => {
+    if (!isLoading && currentPath.startsWith('/admin') && currentPath !== '/admin/login' && !isAuthenticated) {
+      navigate('/admin/login', { replace: true });
+    }
+  }, [isLoading, currentPath, isAuthenticated, navigate]);
 
   // 1. Admin Portal Routing
   if (currentPath.startsWith('/admin')) {

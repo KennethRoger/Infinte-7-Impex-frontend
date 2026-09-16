@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Lock, Mail, Eye, EyeOff, ArrowRight, ShieldCheck, ArrowLeft, Loader2 } from 'lucide-react';
+import { Lock, Mail, Eye, EyeOff, ArrowRight, ArrowLeft, Loader2 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useRouter, Link } from '../../context/RouterContext';
+import { useToast } from '../../context/ToastContext';
 import logoBgRemoved from '../../assets/logo_bg_removed.png';
 
 export const AdminLoginPage: React.FC = () => {
   const { login, isAuthenticated, isLoading } = useAuth();
   const { navigate } = useRouter();
+  const { showSuccess, showError } = useToast();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,29 +28,25 @@ export const AdminLoginPage: React.FC = () => {
     setErrorMsg(null);
 
     if (!email.trim() || !password.trim()) {
-      setErrorMsg('Please enter both email and password.');
+      const msg = 'Please enter both email and password.';
+      setErrorMsg(msg);
+      showError(msg);
       return;
     }
 
     setIsSubmitting(true);
     try {
       await login({ email: email.trim(), password });
+      showSuccess(`Welcome back! Signed in as ${email.trim()}`);
       navigate('/admin');
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        setErrorMsg(err.message);
-      } else {
-        setErrorMsg('Invalid login credentials. Please try again.');
-      }
+      const msg =
+        err instanceof Error ? err.message : 'Invalid login credentials. Please try again.';
+      setErrorMsg(msg);
+      showError(msg);
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const handleFillDemoCredentials = () => {
-    setEmail('admin@infinite7impex.com');
-    setPassword('Admin@12345');
-    setErrorMsg(null);
   };
 
   return (
@@ -165,18 +163,6 @@ export const AdminLoginPage: React.FC = () => {
             </button>
           </div>
         </form>
-
-        {/* Quick Helper for Development */}
-        <div className="pt-2 border-t border-[#EAE2D7] text-center">
-          <button
-            type="button"
-            onClick={handleFillDemoCredentials}
-            className="text-xs text-slate-500 hover:text-[#C88A2C] inline-flex items-center gap-1.5 transition-colors cursor-pointer"
-          >
-            <ShieldCheck className="w-3.5 h-3.5 text-[#22C55E]" />
-            <span>Click to fill default admin credentials</span>
-          </button>
-        </div>
       </div>
 
       {/* Footer copyright */}

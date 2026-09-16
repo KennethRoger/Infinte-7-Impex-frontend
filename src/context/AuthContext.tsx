@@ -50,28 +50,74 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    // Initial validation check
-    const savedToken = localStorage.getItem(TOKEN_KEY);
-    const savedUser = localStorage.getItem(USER_KEY);
-    if (savedToken && savedUser) {
-      try {
-        setToken(savedToken);
-        setAdmin(JSON.parse(savedUser));
-      } catch {
-        localStorage.removeItem(TOKEN_KEY);
-        localStorage.removeItem(USER_KEY);
-        setToken(null);
-        setAdmin(null);
-      }
+  const logout = useCallback(() => {
+    try {
+      api.post('/api/auth/logout', {}).catch(() => {});
+    } catch {
+      // Ignore network errors on logout
     }
-    setIsLoading(false);
+    setToken(null);
+    setAdmin(null);
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
   }, []);
+
+  // Listen for unauthorized 401 events dispatched from api-client
+  useEffect(() => {
+    const handleUnauthorized = () => {
+      logout();
+    };
+
+    window.addEventListener('auth:unauthorized', handleUnauthorized);
+    return () => {
+      window.removeEventListener('auth:unauthorized', handleUnauthorized);
+    };
+  }, [logout]);
+
+  useEffect(() => {
+    // Initial validation check with backend
+    const savedToken = localStorage.getItem(TOKEN_KEY);
+    if (!savedToken) {
+      setToken(null);
+      setAdmin(null);
+      setIsLoading(false);
+      return;
+    }
+
+    let isMounted = true;
+    api
+      .get<{ admin: AdminUser }>('/api/auth/me')
+      .then((response) => {
+        if (isMounted) {
+          if (response.success && response.data?.admin) {
+            setToken(savedToken);
+            setAdmin(response.data.admin);
+            localStorage.setItem(USER_KEY, JSON.stringify(response.data.admin));
+          } else {
+            logout();
+          }
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          // Token is rejected or invalid - clear it
+          logout();
+        }
+      })
+      .finally(() => {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [logout]);
 
   const login = useCallback(async (credentials: { email: string; password: string }): Promise<void> => {
     setIsLoading(true);
     try {
-      // Attempt backend login first
       const response = await api.post<AuthResult>('/api/auth/login', credentials);
       if (response.success && response.data) {
         const { token: receivedToken, admin: receivedAdmin } = response.data;
@@ -83,46 +129,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       throw new Error(response.message || 'Login failed');
     } catch (err: unknown) {
-      // Fallback for standalone frontend development if backend server is not connected
-      if (
-        credentials.email.trim().toLowerCase() === 'admin@infinite7impex.com' &&
-        credentials.password === 'Admin@12345'
-      ) {
-        const mockToken = 'mock_jwt_admin_token_' + Date.now();
-        const mockAdmin: AdminUser = {
-          id: 'admin_primary_01',
-          email: 'admin@infinite7impex.com',
-          role: 'admin',
-        };
-        setToken(mockToken);
-        setAdmin(mockAdmin);
-        localStorage.setItem(TOKEN_KEY, mockToken);
-        localStorage.setItem(USER_KEY, JSON.stringify(mockAdmin));
-        return;
-      }
-
       if (err instanceof ApiRequestError) {
         throw new Error(err.message || 'Invalid email or password');
       }
       if (err instanceof Error) {
         throw err;
       }
-      throw new Error('Invalid email or password');
+      throw new Error('Unable to reach authentication server. Please ensure the backend is running.');
     } finally {
       setIsLoading(false);
     }
-  }, []);
-
-  const logout = useCallback(() => {
-    try {
-      api.post('/api/auth/logout', {}).catch(() => {});
-    } catch {
-      // Ignore network errors on logout
-    }
-    setToken(null);
-    setAdmin(null);
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem(USER_KEY);
   }, []);
 
   return (

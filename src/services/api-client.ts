@@ -58,13 +58,22 @@ export async function apiRequest<T>(
     defaultHeaders['Authorization'] = `Bearer ${storedToken}`;
   }
 
-  const response = await fetch(url, {
-    headers: {
-      ...defaultHeaders,
-      ...(headers as Record<string, string>),
-    },
-    ...customConfig,
-  });
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      headers: {
+        ...defaultHeaders,
+        ...(headers as Record<string, string>),
+      },
+      ...customConfig,
+    });
+  } catch (networkErr: unknown) {
+    throw new ApiRequestError(
+      `Cannot connect to backend server (${url}). Please ensure your backend is running.`,
+      0,
+      'NETWORK_ERROR'
+    );
+  }
 
   let data: ApiResponse<T>;
   try {
@@ -74,6 +83,12 @@ export async function apiRequest<T>(
       `Failed to parse response: ${response.statusText}`,
       response.status
     );
+  }
+
+  if (response.status === 401 && typeof window !== 'undefined') {
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('admin_user');
+    window.dispatchEvent(new CustomEvent('auth:unauthorized'));
   }
 
   if (!response.ok || !data.success) {

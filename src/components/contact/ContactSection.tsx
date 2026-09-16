@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, ArrowUpRight, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
-import { CreateCustomerSchema, type CreateCustomerDto, type Customer } from '../../types/customer';
+import { CreateCustomerSchema, type CreateCustomerDto } from '../../types/customer';
 import { api } from '../../services/api-client';
 import { API_ENDPOINTS } from '../../services/endpoints';
 import { useToast } from '../../context/ToastContext';
@@ -65,32 +65,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
       });
       showSuccess(successMsg);
 
-      // Also persist into local customer list so admin can view it immediately
-      const newCustomer: Customer = {
-        _id: response.data?._id || 'cust_' + Date.now(),
-        fullName: formData.fullName,
-        email: formData.email,
-        country: formData.country,
-        phone: formData.phone,
-        message: formData.message,
-        priority: 'unset',
-        isActive: true,
-        notes: 'Submitted via website quotation form',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
-
-      try {
-        const existingRaw = localStorage.getItem('mock_customers_list');
-        const existingList = existingRaw ? JSON.parse(existingRaw) : [];
-        localStorage.setItem(
-          'mock_customers_list',
-          JSON.stringify([newCustomer, ...existingList])
-        );
-      } catch {
-        // ignore
-      }
-
       setFormData({
         fullName: '',
         country: '',
@@ -99,47 +73,16 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         message: '',
       });
     } catch (err: unknown) {
-      // Fallback for offline dev
-      const newCustomer: Customer = {
-        _id: 'cust_' + Date.now(),
-        fullName: formData.fullName,
-        email: formData.email,
-        country: formData.country,
-        phone: formData.phone,
-        message: formData.message,
-        priority: 'unset',
-        isActive: true,
-        notes: 'Submitted via website quotation form (offline mode)',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
+      const errorMsg =
+        err instanceof Error
+          ? err.message
+          : 'Failed to submit enquiry. Please check your connection and try again.';
 
-      try {
-        const existingRaw = localStorage.getItem('mock_customers_list');
-        const existingList = existingRaw ? JSON.parse(existingRaw) : [];
-        localStorage.setItem(
-          'mock_customers_list',
-          JSON.stringify([newCustomer, ...existingList])
-        );
-      } catch {
-        // ignore
-      }
-
-      const successMsg =
-        'Enquiry recorded successfully! Our export desk will contact you within 24 hours.';
       setFeedback({
-        success: true,
-        message: successMsg,
+        success: false,
+        message: errorMsg,
       });
-      showSuccess(successMsg);
-
-      setFormData({
-        fullName: '',
-        country: '',
-        email: '',
-        phone: '',
-        message: '',
-      });
+      showError(errorMsg);
     } finally {
       setIsSubmitting(false);
     }
@@ -205,16 +148,39 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 </div>
               </div>
 
-              {/* Location */}
+              {/* India Office (Kollam) */}
               <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-lg bg-[#153323] text-white flex items-center justify-center shrink-0 shadow-sm">
+                <div className="w-11 h-11 rounded-lg bg-[#153323] text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
                   <MapPin className="w-5 h-5 text-emerald-400" />
                 </div>
                 <div>
-                  <span className="text-base font-bold text-[#1A221E] block">
-                    Kollam, Kerala, India
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#C88A2C] block">
+                    India Office
                   </span>
-                  <span className="text-xs text-slate-500 font-medium">Primary trade desk &amp; logistics office</span>
+                  <p className="text-sm font-semibold text-[#1A221E] leading-snug mt-0.5">
+                    Building 20/1430, 2nd Milestone,
+                  </p>
+                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                    Kollam - 691094, Kerala, India.
+                  </p>
+                </div>
+              </div>
+
+              {/* UK Office */}
+              <div className="flex items-start gap-4">
+                <div className="w-11 h-11 rounded-lg bg-[#153323] text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                  <MapPin className="w-5 h-5 text-emerald-400" />
+                </div>
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#C88A2C] block">
+                    UK Office
+                  </span>
+                  <p className="text-sm font-semibold text-[#1A221E] leading-snug mt-0.5">
+                    75 Purser Road, Northampton,
+                  </p>
+                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                    NN1 4PG, United Kingdom.
+                  </p>
                 </div>
               </div>
             </div>

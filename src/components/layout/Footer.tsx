@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Col 2: Quick Links */}
-          <div className="lg:col-span-3 space-y-4">
+          <div className="lg:col-span-2 space-y-4">
             <h4 className="text-xs font-bold uppercase tracking-widest text-[#D4902A]">
               Quick Links
             </h4>
@@ -73,7 +73,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Col 3: Contacts */}
-          <div className="lg:col-span-3 space-y-4">
+          <div className="lg:col-span-4 space-y-4">
             <h4 className="text-xs font-bold uppercase tracking-widest text-[#D4902A]">
               Our Contacts
             </h4>
@@ -96,11 +96,36 @@ export const Footer: React.FC = () => {
                   <span className="text-xs text-slate-400 block">response within 24 hours</span>
                 </div>
               </li>
+
+              {/* India Address */}
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-[#D4902A] shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-medium text-slate-200">Kollam, Kerala, India</span>
-                  <span className="text-xs text-slate-400 block">Logistics &amp; Port Dispatch</span>
+                <div className="space-y-0.5">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#D4902A] block">
+                    India Office
+                  </span>
+                  <p className="text-xs text-slate-200 leading-relaxed font-medium">
+                    Building 20/1430, 2nd Milestone,
+                  </p>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    Kollam - 691094, Kerala, India.
+                  </p>
+                </div>
+              </li>
+
+              {/* UK Address */}
+              <li className="flex items-start gap-3">
+                <MapPin className="w-4 h-4 text-[#D4902A] shrink-0 mt-0.5" />
+                <div className="space-y-0.5">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#D4902A] block">
+                    UK Office
+                  </span>
+                  <p className="text-xs text-slate-200 leading-relaxed font-medium">
+                    75 Purser Road, Northampton,
+                  </p>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    NN1 4PG, United Kingdom.
+                  </p>
                 </div>
               </li>
             </ul>

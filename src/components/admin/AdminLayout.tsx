@@ -3,6 +3,7 @@ import { Menu, LogOut, ExternalLink, ShieldCheck } from 'lucide-react';
 import { AdminSidebar } from './AdminSidebar';
 import { useRouter, Link } from '../../context/RouterContext';
 import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -12,6 +13,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { currentPath, navigate } = useRouter();
   const { admin, logout } = useAuth();
+  const { showInfo } = useToast();
 
   const getPageTitle = () => {
     if (currentPath === '/admin' || currentPath === '/admin/dashboard') return 'Dashboard';
@@ -24,6 +26,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
 
   const handleSignOut = () => {
     logout();
+    showInfo('Signed out of admin portal successfully.');
     navigate('/admin/login');
   };
 
