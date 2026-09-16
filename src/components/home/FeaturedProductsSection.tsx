@@ -1,6 +1,6 @@
 import React from 'react';
-import redOnionImg from '../../assets/red_onion_product.jpg';
-import greenChilliImg from '../../assets/green_chilli_product.jpg';
+import onionImg from '../../assets/products/onion.avif';
+import greenChilliImg from '../../assets/products/green-chilli.avif';
 import { ArrowRight } from 'lucide-react';
 import { Link } from '../../context/RouterContext';
 
@@ -9,18 +9,18 @@ export const FeaturedProductsSection: React.FC = () => {
     {
       name: 'Red Onion',
       tag: 'MOST POPULAR',
-      image: redOnionImg,
+      image: onionImg,
       description:
-        'Grade A export red onion sourced directly from Nashik, Maharashtra. Cured, moisture-tested, and mesh-bag packed for extended ocean shelf life.',
-      detailsLink: '/products',
+        'Red onions are globally recognised for their pungency, long shelf life, and consistent sizing. Sourced directly from the Lasalgaon mandi in Nashik.',
+      detailsLink: '/products/fresh-vegetables',
     },
     {
       name: 'Green Chilli',
       tag: 'HIGH DEMAND',
       image: greenChilliImg,
       description:
-        'Fresh, sharp Indian green chillies from certified growers. Carefully hand-picked, pre-cooled, and packed in ventilated corrugated cartons for reefer shipping.',
-      detailsLink: '/products',
+        "Our green chillies are sourced from Andhra Pradesh and Telangana, India's largest chilli-growing belt. Known for vivid green colour, firm texture, and balanced heat.",
+      detailsLink: '/products/fresh-vegetables',
     },
   ];
 
@@ -78,13 +78,13 @@ export const FeaturedProductsSection: React.FC = () => {
                 </div>
 
                 <div className="pt-2">
-                  <a
+                  <Link
                     href={product.detailsLink}
                     className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-900 hover:text-[#C88A2C] transition-colors"
                   >
                     <span>View Details</span>
                     <ArrowRight className="w-4 h-4 text-[#C88A2C]" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -9,7 +9,7 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { label: 'Home', href: '/', active: currentPath === '/' },
-    { label: 'Products', href: '/products', active: currentPath === '/products' },
+    { label: 'Products', href: '/products', active: currentPath === '/products' || currentPath.startsWith('/products/') },
     { label: 'Export Process', href: '/export-process', active: currentPath === '/export-process' },
     { label: 'Countries', href: '/countries', active: currentPath === '/countries' },
     { label: 'About', href: '/about', active: currentPath === '/about' },
