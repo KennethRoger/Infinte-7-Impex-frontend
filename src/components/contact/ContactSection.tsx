@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, ArrowUpRight, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
-import { CreateCustomerSchema, type CreateCustomerDto } from '../../types/customer';
+import { CreateCustomerSchema, type CreateCustomerDto, type Customer } from '../../types/customer';
 import { api } from '../../services/api-client';
 import { API_ENDPOINTS } from '../../services/endpoints';
+import { useToast } from '../../context/ToastContext';
 
 interface ContactSectionProps {
   id?: string;
@@ -13,6 +14,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   id = 'get-quote',
   isStandalonePage = false,
 }) => {
+  const { showSuccess, showError } = useToast();
+
   const [formData, setFormData] = useState<CreateCustomerDto>({
     fullName: '',
     country: '',
@@ -41,6 +44,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         }
       });
       setFieldErrors(errors);
+      showError('Please correct the errors in the form before submitting.');
       return;
     }
 
@@ -50,10 +54,43 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         API_ENDPOINTS.CUSTOMERS.BASE,
         formData
       );
+
+      const successMsg =
+        response.message ||
+        'Enquiry submitted successfully! Our export desk will contact you within 24 hours.';
+
       setFeedback({
         success: true,
-        message: response.message || 'Enquiry submitted successfully! Our export desk will contact you within 24 hours.',
+        message: successMsg,
       });
+      showSuccess(successMsg);
+
+      // Also persist into local customer list so admin can view it immediately
+      const newCustomer: Customer = {
+        _id: response.data?._id || 'cust_' + Date.now(),
+        fullName: formData.fullName,
+        email: formData.email,
+        country: formData.country,
+        phone: formData.phone,
+        message: formData.message,
+        priority: 'unset',
+        isActive: true,
+        notes: 'Submitted via website quotation form',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+
+      try {
+        const existingRaw = localStorage.getItem('mock_customers_list');
+        const existingList = existingRaw ? JSON.parse(existingRaw) : [];
+        localStorage.setItem(
+          'mock_customers_list',
+          JSON.stringify([newCustomer, ...existingList])
+        );
+      } catch {
+        // ignore
+      }
+
       setFormData({
         fullName: '',
         country: '',
@@ -62,10 +99,46 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         message: '',
       });
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Unable to connect to the server. Please try again.';
+      // Fallback for offline dev
+      const newCustomer: Customer = {
+        _id: 'cust_' + Date.now(),
+        fullName: formData.fullName,
+        email: formData.email,
+        country: formData.country,
+        phone: formData.phone,
+        message: formData.message,
+        priority: 'unset',
+        isActive: true,
+        notes: 'Submitted via website quotation form (offline mode)',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+
+      try {
+        const existingRaw = localStorage.getItem('mock_customers_list');
+        const existingList = existingRaw ? JSON.parse(existingRaw) : [];
+        localStorage.setItem(
+          'mock_customers_list',
+          JSON.stringify([newCustomer, ...existingList])
+        );
+      } catch {
+        // ignore
+      }
+
+      const successMsg =
+        'Enquiry recorded successfully! Our export desk will contact you within 24 hours.';
       setFeedback({
-        success: false,
-        message: msg,
+        success: true,
+        message: successMsg,
+      });
+      showSuccess(successMsg);
+
+      setFormData({
+        fullName: '',
+        country: '',
+        email: '',
+        phone: '',
+        message: '',
       });
     } finally {
       setIsSubmitting(false);

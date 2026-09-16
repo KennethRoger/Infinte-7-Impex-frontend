@@ -11,6 +11,7 @@ export const API_ENDPOINTS = {
     BASE: '/api/customers',
     BY_ID: (id: string) => `/api/customers/${id}`,
     PRIORITY: (id: string) => `/api/customers/${id}/priority`,
+    NOTES: (id: string) => `/api/customers/${id}/notes`,
   },
   CATEGORIES: {
     BASE: '/api/categories',

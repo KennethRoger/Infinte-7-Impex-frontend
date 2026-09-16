@@ -13,6 +13,9 @@ import { BlogListPage } from './pages/BlogListPage';
 import { BlogDetailPage } from './pages/BlogDetailPage';
 import { Footer } from './components/layout/Footer';
 
+import { ToastProvider } from './context/ToastContext';
+import { ContactSection } from './components/contact/ContactSection';
+
 // Admin imports
 import { AdminLoginPage } from './pages/admin/AdminLoginPage';
 import { AdminLayout } from './components/admin/AdminLayout';
@@ -96,6 +99,14 @@ const AppContent: React.FC = () => {
       return <BlogListPage />;
     }
 
+    if (currentPath === '/contact') {
+      return (
+        <div className="w-full bg-[#E8DFD2] min-h-screen">
+          <ContactSection isStandalonePage />
+        </div>
+      );
+    }
+
     switch (currentPath) {
       case '/export-process':
         return <ExportProcessPage />;
@@ -120,11 +131,13 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <AuthProvider>
-      <RouterProvider>
-        <AppContent />
-      </RouterProvider>
-    </AuthProvider>
+    <ToastProvider>
+      <AuthProvider>
+        <RouterProvider>
+          <AppContent />
+        </RouterProvider>
+      </AuthProvider>
+    </ToastProvider>
   );
 };
 
