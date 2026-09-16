@@ -8,6 +8,8 @@ import { ProductDetailPage } from './pages/ProductDetailPage';
 import { ExportProcessPage } from './pages/ExportProcessPage';
 import { CountriesPage } from './pages/CountriesPage';
 import { AboutPage } from './pages/AboutPage';
+import { BlogListPage } from './pages/BlogListPage';
+import { BlogDetailPage } from './pages/BlogDetailPage';
 import { Footer } from './components/layout/Footer';
 
 const AppContent: React.FC = () => {
@@ -27,6 +29,14 @@ const AppContent: React.FC = () => {
 
     if (currentPath === '/products' || currentPath.startsWith('/products/')) {
       return <ProductsPage />;
+    }
+
+    if (currentPath.startsWith('/blog/') && currentPath !== '/blog/') {
+      return <BlogDetailPage />;
+    }
+
+    if (currentPath === '/blog' || currentPath === '/blog/') {
+      return <BlogListPage />;
     }
 
     switch (currentPath) {

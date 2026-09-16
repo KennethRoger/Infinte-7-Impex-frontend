@@ -13,7 +13,7 @@ export const Navbar: React.FC = () => {
     { label: 'Export Process', href: '/export-process', active: currentPath === '/export-process' },
     { label: 'Countries', href: '/countries', active: currentPath === '/countries' },
     { label: 'About', href: '/about', active: currentPath === '/about' },
-    { label: 'Blog', href: '/blog', active: currentPath === '/blog' },
+    { label: 'Blog', href: '/blog', active: currentPath === '/blog' || currentPath.startsWith('/blog/') },
   ];
 
   const handleScrollToQuote = () => {
