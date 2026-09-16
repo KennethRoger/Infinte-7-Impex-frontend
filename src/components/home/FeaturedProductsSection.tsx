@@ -2,6 +2,7 @@ import React from 'react';
 import redOnionImg from '../../assets/red_onion_product.jpg';
 import greenChilliImg from '../../assets/green_chilli_product.jpg';
 import { ArrowRight } from 'lucide-react';
+import { Link } from '../../context/RouterContext';
 
 export const FeaturedProductsSection: React.FC = () => {
   const products = [
@@ -11,7 +12,7 @@ export const FeaturedProductsSection: React.FC = () => {
       image: redOnionImg,
       description:
         'Grade A export red onion sourced directly from Nashik, Maharashtra. Cured, moisture-tested, and mesh-bag packed for extended ocean shelf life.',
-      detailsLink: '#products',
+      detailsLink: '/products',
     },
     {
       name: 'Green Chilli',
@@ -19,7 +20,7 @@ export const FeaturedProductsSection: React.FC = () => {
       image: greenChilliImg,
       description:
         'Fresh, sharp Indian green chillies from certified growers. Carefully hand-picked, pre-cooled, and packed in ventilated corrugated cartons for reefer shipping.',
-      detailsLink: '#products',
+      detailsLink: '/products',
     },
   ];
 
@@ -37,13 +38,13 @@ export const FeaturedProductsSection: React.FC = () => {
             </h2>
           </div>
 
-          <a
-            href="#products"
+          <Link
+            href="/products"
             className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-[#C88A2C] transition-colors shrink-0"
           >
             <span>View All Products</span>
             <ArrowRight className="w-3.5 h-3.5" />
-          </a>
+          </Link>
         </div>
 
         {/* 2 Featured Products Cards */}

@@ -2,6 +2,7 @@ import React from 'react';
 import { RouterProvider, useRouter } from './context/RouterContext';
 import { Navbar } from './components/layout/Navbar';
 import { HomePage } from './pages/HomePage';
+import { ProductsPage } from './pages/ProductsPage';
 import { ExportProcessPage } from './pages/ExportProcessPage';
 import { CountriesPage } from './pages/CountriesPage';
 import { AboutPage } from './pages/AboutPage';
@@ -11,6 +12,10 @@ const AppContent: React.FC = () => {
   const { currentPath } = useRouter();
 
   const renderCurrentPage = () => {
+    if (currentPath === '/products' || currentPath.startsWith('/products/')) {
+      return <ProductsPage />;
+    }
+
     switch (currentPath) {
       case '/export-process':
         return <ExportProcessPage />;
