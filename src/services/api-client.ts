@@ -68,8 +68,11 @@ export async function apiRequest<T>(
       ...customConfig,
     });
   } catch (networkErr: unknown) {
+    if (import.meta.env.DEV) {
+      console.error('[API Network Error]', networkErr);
+    }
     throw new ApiRequestError(
-      `Cannot connect to backend server (${url}). Please ensure your backend is running.`,
+      'Unable to connect to the server. Please check your internet connection or try again later.',
       0,
       'NETWORK_ERROR'
     );
@@ -80,7 +83,7 @@ export async function apiRequest<T>(
     data = await response.json();
   } catch {
     throw new ApiRequestError(
-      `Failed to parse response: ${response.statusText}`,
+      'Server error. Please try again later.',
       response.status
     );
   }

@@ -123,9 +123,12 @@ export const BlogApiService = {
         headers,
         body: formData,
       });
-    } catch {
+    } catch (networkErr: unknown) {
+      if (import.meta.env.DEV) {
+        console.error('[Upload Network Error]', networkErr);
+      }
       throw new ApiRequestError(
-        `Cannot connect to backend server (${url}). Please ensure your backend is running.`,
+        'Unable to connect to the server. Please try again later.',
         0,
         'NETWORK_ERROR'
       );
@@ -136,7 +139,7 @@ export const BlogApiService = {
       data = await response.json();
     } catch {
       throw new ApiRequestError(
-        `Failed to parse server response: ${response.statusText}`,
+        'Server error. Please try again later.',
         response.status
       );
     }
