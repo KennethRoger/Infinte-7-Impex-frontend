@@ -50,14 +50,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
     setIsSubmitting(true);
     try {
-      const response = await api.post<{ _id: string; fullName: string }>(
+      await api.post<{ _id: string; fullName: string }>(
         API_ENDPOINTS.CUSTOMERS.BASE,
         formData
       );
 
       const successMsg =
-        response.message ||
-        'Enquiry submitted successfully! Our export desk will contact you within 24 hours.';
+        'Thank you for contacting us! Our export team will reach out to you shortly.';
 
       setFeedback({
         success: true,
@@ -262,7 +261,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 {/* Phone Number */}
                 <div className="space-y-1.5">
                   <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600">
-                    Phone Number
+                    Phone Number (with country code)
                   </label>
                   <input
                     type="text"

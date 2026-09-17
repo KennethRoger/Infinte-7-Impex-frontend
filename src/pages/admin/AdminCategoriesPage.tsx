@@ -18,6 +18,7 @@ import { DataTable, type ColumnDef } from '../../components/common/DataTable';
 import { ImageUploadField } from '../../components/common/ImageUploadField';
 import { CategoryApiService } from '../../services/category.service';
 import { useToast } from '../../context/ToastContext';
+import { useDebounce } from '../../hooks/useDebounce';
 import {
   CreateCategorySchema,
   type ProductCategory,
@@ -36,6 +37,7 @@ export const AdminCategoriesPage: React.FC = () => {
 
   // Filters & Sorting
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 350);
   const [sortField, setSortField] = useState<string>('createdAt');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
@@ -59,7 +61,7 @@ export const AdminCategoriesPage: React.FC = () => {
     setIsLoading(true);
     try {
       const result = await CategoryApiService.getAll(
-        { name: searchTerm },
+        { name: debouncedSearchTerm },
         { page: currentPage, limit: pageSize },
         { sortBy: sortField, sortOrder }
       );
@@ -73,7 +75,7 @@ export const AdminCategoriesPage: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [searchTerm, currentPage, pageSize, sortField, sortOrder, showError]);
+  }, [debouncedSearchTerm, currentPage, pageSize, sortField, sortOrder, showError]);
 
   useEffect(() => {
     loadCategories();

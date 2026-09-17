@@ -7,6 +7,7 @@ import type {
 import type { PaginatedResult, PaginationParams } from '../types/api';
 
 export interface CustomerFilters {
+  search?: string;
   fullName?: string;
   email?: string;
   country?: string;
@@ -31,6 +32,7 @@ export const CustomerApiService = {
       sortOrder: sort.sortOrder,
     };
 
+    if (filters.search) queryParams['search'] = filters.search;
     if (filters.fullName) queryParams['fullName'] = filters.fullName;
     if (filters.email) queryParams['email'] = filters.email;
     if (filters.country) queryParams['country'] = filters.country;

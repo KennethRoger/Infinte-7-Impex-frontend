@@ -5,7 +5,6 @@ import {
   Package,
   BookOpen,
   ArrowRight,
-  ShieldAlert,
   Sparkles,
   LogOut,
 } from 'lucide-react';
@@ -71,7 +70,7 @@ export const AdminDashboardPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. Dashboard Notice */}
+      {/* 2. Dashboard Notice
       <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-4 sm:p-5 flex items-start gap-3.5 text-amber-900">
         <ShieldAlert className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
         <div className="text-xs sm:text-sm leading-relaxed">
@@ -79,7 +78,7 @@ export const AdminDashboardPage: React.FC = () => {
           As requested, this is the opening dashboard view. Analytics metrics, activity logs, and export charts
           will be added here in upcoming iterations. You can start managing each dedicated section below.
         </div>
-      </div>
+      </div> */}
 
       {/* 3. Section Navigation Cards */}
       <div className="space-y-4">

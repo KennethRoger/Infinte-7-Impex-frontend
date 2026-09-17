@@ -149,12 +149,12 @@ export const ProductsPage: React.FC = () => {
                 className="bg-white rounded-2xl overflow-hidden border border-[#E5DCD1] shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:border-[#C88A2C]/50 hover:shadow-lg transition-all duration-300 flex flex-col group"
               >
                 {/* Image Banner */}
-                <div className="w-full aspect-[4/3] sm:h-64 lg:h-72 overflow-hidden bg-slate-100 relative">
+                <div className="w-full h-60 sm:h-64 lg:h-72 overflow-hidden bg-slate-900 relative shrink-0">
                   <img
                     src={cat.image || defaultProduceImg}
                     alt={cat.name}
                     loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                       // Fallback if URL fails to load
                       (e.target as HTMLImageElement).src = defaultProduceImg;

@@ -27,6 +27,7 @@ import {
   type CreateProductDto,
 } from '../../types/product';
 import type { ProductCategory } from '../../types/category';
+import { useDebounce } from '../../hooks/useDebounce';
 
 export const AdminProductsPage: React.FC = () => {
   const { showSuccess, showError } = useToast();
@@ -41,6 +42,7 @@ export const AdminProductsPage: React.FC = () => {
 
   // Filters & Sorting
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 350);
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<string>('');
   const [sortField, setSortField] = useState<string>('createdAt');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
@@ -79,7 +81,7 @@ export const AdminProductsPage: React.FC = () => {
     try {
       const result = await ProductApiService.getAll(
         {
-          name: searchTerm,
+          name: debouncedSearchTerm,
           category: selectedCategoryFilter || undefined,
         },
         { page: currentPage, limit: pageSize },
@@ -95,7 +97,7 @@ export const AdminProductsPage: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [searchTerm, selectedCategoryFilter, currentPage, pageSize, sortField, sortOrder, showError]);
+  }, [debouncedSearchTerm, selectedCategoryFilter, currentPage, pageSize, sortField, sortOrder, showError]);
 
   useEffect(() => {
     loadCategories();

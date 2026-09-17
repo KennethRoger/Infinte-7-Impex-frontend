@@ -31,9 +31,9 @@ export const ImageUploadField: React.FC<ImageUploadFieldProps> = ({
     setUploadError(null);
     setUploadSuccess(false);
 
-    // Validate size (max 10MB)
-    if (file.size > 10 * 1024 * 1024) {
-      setUploadError('File size exceeds 10MB limit.');
+    // Validate size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      setUploadError('File size exceeds 5MB limit.');
       return;
     }
 
@@ -182,7 +182,7 @@ export const ImageUploadField: React.FC<ImageUploadFieldProps> = ({
                     {isUploading ? 'Uploading to Cloudinary...' : 'Click to browse or drop an image'}
                   </p>
                   <p className="text-[11px] text-slate-500 mt-0.5">
-                    Supports JPEG, PNG, WebP, AVIF up to 10MB
+                    Supports JPEG, PNG, WebP, AVIF up to 5MB
                   </p>
                 </div>
               </div>

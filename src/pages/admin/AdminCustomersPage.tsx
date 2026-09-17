@@ -20,6 +20,7 @@ import { DataTable, type ColumnDef } from '../../components/common/DataTable';
 import { CustomerApiService } from '../../services/customer.service';
 import { useToast } from '../../context/ToastContext';
 import type { Customer, CustomerPriority } from '../../types/customer';
+import { useDebounce } from '../../hooks/useDebounce';
 
 export const AdminCustomersPage: React.FC = () => {
   const { showSuccess, showError } = useToast();
@@ -33,6 +34,7 @@ export const AdminCustomersPage: React.FC = () => {
 
   // Filters & Sorting
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 350);
   const [priorityFilter, setPriorityFilter] = useState<CustomerPriority | 'all'>('all');
   const [sortField, setSortField] = useState<string>('createdAt');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
@@ -73,7 +75,7 @@ export const AdminCustomersPage: React.FC = () => {
     try {
       const result = await CustomerApiService.getAll(
         {
-          fullName: searchTerm,
+          search: debouncedSearchTerm,
           priority: priorityFilter,
         },
         {
@@ -95,7 +97,7 @@ export const AdminCustomersPage: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [searchTerm, priorityFilter, currentPage, pageSize, sortField, sortOrder, showError]);
+  }, [debouncedSearchTerm, priorityFilter, currentPage, pageSize, sortField, sortOrder, showError]);
 
   useEffect(() => {
     loadCustomers();

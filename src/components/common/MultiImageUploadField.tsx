@@ -43,9 +43,9 @@ export const MultiImageUploadField: React.FC<MultiImageUploadFieldProps> = ({
 
     setUploadError(null);
 
-    // Validate 10MB limit
-    if (file.size > 10 * 1024 * 1024) {
-      setUploadError('Image file size exceeds 10MB limit.');
+    // Validate 5MB limit
+    if (file.size > 5 * 1024 * 1024) {
+      setUploadError('Image file size exceeds 5MB limit.');
       return;
     }
 
