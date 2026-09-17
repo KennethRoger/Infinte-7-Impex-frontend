@@ -1,28 +1,46 @@
-import React from 'react';
-import onionImg from '../../assets/products/onion.avif';
-import greenChilliImg from '../../assets/products/green-chilli.avif';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
-import { Link } from '../../context/RouterContext';
+import { useRouter, Link } from '../../context/RouterContext';
+import { ProductApiService } from '../../services/product.service';
+import type { PopulatedProduct } from '../../types/product';
+import defaultProduceImg from '../../assets/products/fresh-vegetables.jpg';
 
 export const FeaturedProductsSection: React.FC = () => {
-  const products = [
-    {
-      name: 'Red Onion',
-      tag: 'MOST POPULAR',
-      image: onionImg,
-      description:
-        'Red onions are globally recognised for their pungency, long shelf life, and consistent sizing. Sourced directly from the Lasalgaon mandi in Nashik.',
-      detailsLink: '/products/fresh-vegetables/onion',
-    },
-    {
-      name: 'Green Chilli',
-      tag: 'HIGH DEMAND',
-      image: greenChilliImg,
-      description:
-        "Our green chillies are sourced from Andhra Pradesh and Telangana, India's largest chilli-growing belt. Known for vivid green colour, firm texture, and balanced heat.",
-      detailsLink: '/products/fresh-vegetables',
-    },
-  ];
+  const { navigate } = useRouter();
+  const [products, setProducts] = useState<PopulatedProduct[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    const fetchLatestProducts = async () => {
+      try {
+        const allProds = await ProductApiService.getAllPublic();
+        const active = allProds.filter((p) => !p.isRemoved);
+        if (isMounted) {
+          // Take the 3 latest products
+          setProducts(active.slice(0, 3));
+        }
+      } catch (err) {
+        console.error('Failed to load featured products:', err);
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchLatestProducts();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleProductClick = (product: PopulatedProduct) => {
+    const catSlug = product.category?.name
+      ? product.category.name.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-')
+      : 'produce';
+    navigate(`/products/${catSlug}/${product._id}`);
+  };
 
   return (
     <section id="products" className="py-20 bg-[#FAF7F2] border-t border-[#EAE2D7]">
@@ -47,49 +65,88 @@ export const FeaturedProductsSection: React.FC = () => {
           </Link>
         </div>
 
-        {/* 2 Featured Products Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-          {products.map((product) => (
-            <div
-              key={product.name}
-              className="bg-white rounded-2xl overflow-hidden border border-[#E5DCD1] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group"
-            >
-              {/* Image Container */}
-              <div className="relative h-64 sm:h-72 lg:h-80 overflow-hidden bg-slate-100">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-
-              {/* Card Body */}
-              <div className="p-7 sm:p-8 flex-1 flex flex-col justify-between space-y-4">
-                <div className="space-y-2.5">
-                  <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#C88A2C] bg-[#FAF3E8] px-2.5 py-1 rounded">
-                    {product.tag}
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-[#1A221E] font-serif">
-                    {product.name}
-                  </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed font-normal">
-                    {product.description}
-                  </p>
-                </div>
-
-                <div className="pt-2">
-                  <Link
-                    href={product.detailsLink}
-                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-900 hover:text-[#C88A2C] transition-colors"
-                  >
-                    <span>View Details</span>
-                    <ArrowRight className="w-4 h-4 text-[#C88A2C]" />
-                  </Link>
+        {/* 3 Latest Featured Products Cards */}
+        {isLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="bg-white rounded-2xl overflow-hidden border border-[#E5DCD1] shadow-xs flex flex-col animate-pulse"
+              >
+                <div className="w-full h-64 sm:h-72 bg-slate-200" />
+                <div className="p-7 space-y-4 flex-1 flex flex-col justify-between">
+                  <div className="space-y-2">
+                    <div className="h-4 bg-slate-200 rounded w-1/4" />
+                    <div className="h-6 bg-slate-200 rounded w-3/4" />
+                    <div className="h-4 bg-slate-100 rounded w-full" />
+                    <div className="h-4 bg-slate-100 rounded w-2/3" />
+                  </div>
+                  <div className="h-8 bg-slate-200 rounded w-28 mt-4" />
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : products.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.map((product) => {
+              const coverImg = product.images?.[0] || defaultProduceImg;
+              return (
+                <div
+                  key={product._id}
+                  className="bg-white rounded-2xl overflow-hidden border border-[#E5DCD1] shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:border-[#C88A2C]/50 hover:shadow-xl transition-all duration-300 flex flex-col group"
+                >
+                  {/* Product Image */}
+                  <div className="w-full h-64 sm:h-72 overflow-hidden bg-slate-100 relative">
+                    <img
+                      src={coverImg}
+                      alt={product.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = defaultProduceImg;
+                      }}
+                    />
+                    {product.images && product.images.length > 1 && (
+                      <span className="absolute bottom-3 right-3 bg-black/60 text-white text-[11px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-xs">
+                        {product.images.length} photos
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Product Info */}
+                  <div className="p-7 flex-1 flex flex-col justify-between space-y-5 bg-white">
+                    <div className="space-y-3">
+                      {/* Category Badge */}
+                      <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#C88A2C]">
+                        {product.category?.name || 'Produce'}
+                      </span>
+
+                      <h3 className="text-2xl font-bold font-serif text-[#1A221E] leading-snug group-hover:text-[#8A5A1B] transition-colors">
+                        {product.name}
+                      </h3>
+
+                      <p className="text-sm text-slate-600 leading-relaxed font-normal line-clamp-3">
+                        {product.description ||
+                          'Export-grade produce rigorously inspected, graded, and packed for international shipping.'}
+                      </p>
+                    </div>
+
+                    <div className="pt-2">
+                      <button
+                        type="button"
+                        onClick={() => handleProductClick(product)}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-[#1A221E] group/btn hover:text-[#C88A2C] transition-colors cursor-pointer"
+                      >
+                        <span>View Details</span>
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : null}
       </div>
     </section>
   );
