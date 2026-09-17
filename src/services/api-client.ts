@@ -59,7 +59,7 @@ export async function apiRequest<T>(
   endpoint: string,
   options: RequestOptions = {}
 ): Promise<ApiResponse<T>> {
-  const { params, token, headers, skipCache = false, ttl = 180000, ...customConfig } = options;
+  const { params, token, headers, skipCache = false, ttl = 30000, ...customConfig } = options;
   const method = (customConfig.method || 'GET').toUpperCase();
 
   let url = endpoint.startsWith('http') ? endpoint : `${ENV.API_BASE_URL}${endpoint}`;
