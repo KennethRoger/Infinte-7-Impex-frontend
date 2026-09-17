@@ -4,7 +4,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { Navbar } from './components/layout/Navbar';
 import { HomePage } from './pages/HomePage';
 import { ProductsPage } from './pages/ProductsPage';
-import { FreshVegetablesPage } from './pages/FreshVegetablesPage';
+import { CategoryProductsPage } from './pages/CategoryProductsPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
 import { ExportProcessPage } from './pages/ExportProcessPage';
 import { CountriesPage } from './pages/CountriesPage';
@@ -83,6 +83,7 @@ const AppContent: React.FC = () => {
 
   // 2. Public Website Routing
   const renderCurrentPage = () => {
+    // Legacy demo routes
     if (
       currentPath === '/products/fresh-vegetables/onion' ||
       currentPath === '/products/onion'
@@ -90,11 +91,26 @@ const AppContent: React.FC = () => {
       return <ProductDetailPage />;
     }
 
-    if (currentPath === '/products/fresh-vegetables') {
-      return <FreshVegetablesPage />;
+    // Direct product detail route /product/:productId
+    if (currentPath.startsWith('/product/')) {
+      const prodId = currentPath.replace('/product/', '').split('/')[0];
+      return <ProductDetailPage productId={prodId} />;
     }
 
-    if (currentPath === '/products' || currentPath.startsWith('/products/')) {
+    // Product routes under /products/
+    if (currentPath.startsWith('/products/')) {
+      const parts = currentPath.replace('/products/', '').split('/').filter(Boolean);
+      if (parts.length >= 2) {
+        // e.g. /products/fresh-vegetables/6aa123...
+        return <ProductDetailPage categorySlug={parts[0]} productId={parts[1]} />;
+      }
+      if (parts.length === 1) {
+        // e.g. /products/fresh-vegetables or /products/onion
+        return <CategoryProductsPage categorySlug={parts[0]} />;
+      }
+    }
+
+    if (currentPath === '/products' || currentPath === '/products/') {
       return <ProductsPage />;
     }
 
