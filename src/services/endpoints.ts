@@ -25,4 +25,5 @@ export const API_ENDPOINTS = {
     BASE: '/api/blogs',
     BY_ID: (id: string) => `/api/blogs/${id}`,
   },
+  UPLOAD: '/api/upload',
 } as const;

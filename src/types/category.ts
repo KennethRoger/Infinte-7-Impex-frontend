@@ -5,8 +5,12 @@ export const CreateCategorySchema = z.object({
     .string()
     .min(2, 'Name must be between 2 and 50 characters')
     .max(50, 'Name must be between 2 and 50 characters'),
-  description: z.string().optional(),
-  image: z.url('Image must be a valid URL').optional(),
+  description: z.string().optional().or(z.literal('')),
+  image: z
+    .string()
+    .url('Image must be a valid URL')
+    .optional()
+    .or(z.literal('')),
 });
 
 export type CreateCategoryDto = z.infer<typeof CreateCategorySchema>;
@@ -14,11 +18,18 @@ export type CreateCategoryDto = z.infer<typeof CreateCategorySchema>;
 export const UpdateCategorySchema = CreateCategorySchema.partial();
 export type UpdateCategoryDto = z.infer<typeof UpdateCategorySchema>;
 
-export const CategorySchema = CreateCategorySchema.extend({
+export const CategorySchema = z.object({
   _id: z.string(),
+  name: z.string(),
+  description: z.string().optional(),
+  image: z.string().optional(),
   isRemoved: z.boolean().default(false),
-  createdAt: z.iso.datetime().optional(),
-  updatedAt: z.iso.datetime().optional(),
+  createdAt: z.string().optional(),
+  updatedAt: z.string().optional(),
 });
 
 export type ProductCategory = z.infer<typeof CategorySchema>;
+
+export interface CategoryFilters {
+  name?: string;
+}
