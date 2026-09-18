@@ -1,0 +1,19 @@
+# Robots.txt for Infinite 7 Impex
+# https://www.infinite7impex.com
+
+User-agent: *
+Allow: /
+Allow: /products
+Allow: /about
+Allow: /export-process
+Allow: /countries
+Allow: /blog
+Allow: /contact
+
+# Disallow indexing of private administrative portal
+Disallow: /admin
+Disallow: /admin/
+Disallow: /admin/*
+
+# Sitemap location
+Sitemap: https://www.infinite7impex.com/sitemap.xml

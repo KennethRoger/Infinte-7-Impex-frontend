@@ -36,6 +36,29 @@ const AppContent: React.FC = () => {
     }
   }, [isLoading, currentPath, isAuthenticated, navigate]);
 
+  // Dynamic SEO Page Titles
+  React.useEffect(() => {
+    let title = 'Infinite 7 Impex | Indian Agricultural Produce & Commodities Exporter';
+    if (currentPath === '/products') {
+      title = 'Export Produce & Commodities Catalog | Infinite 7 Impex';
+    } else if (currentPath.startsWith('/products/')) {
+      title = 'Agricultural Export Products | Infinite 7 Impex';
+    } else if (currentPath === '/about') {
+      title = 'About Us | Infinite 7 Impex - Certified Indian Agro Exporters';
+    } else if (currentPath === '/export-process') {
+      title = 'Export Process & Quality Assurance | Infinite 7 Impex';
+    } else if (currentPath === '/countries') {
+      title = 'Global Export Destinations | Infinite 7 Impex';
+    } else if (currentPath === '/blog' || currentPath.startsWith('/blog/')) {
+      title = 'Agro Export Insights & Market Intelligence | Infinite 7 Impex';
+    } else if (currentPath === '/contact') {
+      title = 'Contact Us & Wholesale Inquiry | Infinite 7 Impex';
+    } else if (currentPath.startsWith('/admin')) {
+      title = 'Admin Management Portal | Infinite 7 Impex';
+    }
+    document.title = title;
+  }, [currentPath]);
+
   // 1. Admin Portal Routing
   if (currentPath.startsWith('/admin')) {
     if (isLoading) {
