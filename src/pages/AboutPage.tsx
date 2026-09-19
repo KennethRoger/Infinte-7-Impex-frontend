@@ -60,7 +60,7 @@ export const AboutPage: React.FC = () => {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-tight leading-tight">
             About Infinite 7 Impex
           </h1>
-          <p className="text-[#8ED4AB] text-sm sm:text-base max-w-2xl pt-1 leading-relaxed font-normal">
+          <p className="text-slate-300 text-sm sm:text-base max-w-2xl pt-1 leading-relaxed font-normal">
             Founded in 2025 by three friends from Kerala with an uncompromising commitment to quality.
           </p>
         </div>
