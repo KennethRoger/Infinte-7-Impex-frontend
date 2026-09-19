@@ -44,11 +44,10 @@ export const HeroSection: React.FC = () => {
 
             {/* Main Editorial Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.12]">
-              India's Finest{' '}
+              Infinite Possibilities,{' '}
               <span className="text-[#D4902A] block sm:inline font-serif font-bold">
-                Agri-Products
-              </span>{' '}
-              Delivered Globally
+                Global Reach
+              </span>
             </h1>
 
             {/* Subheading */}

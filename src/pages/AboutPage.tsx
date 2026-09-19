@@ -4,10 +4,10 @@ import { useRouter } from '../context/RouterContext';
 
 // About page assets
 import onionFounderImg from '../assets/about/onion-founder.jpg';
-import teamImg from '../assets/about/team.jpg';
-import farmImg from '../assets/about/farm.jpg';
-import packagingImg from '../assets/about/packaging.jpg';
-import harvestImg from '../assets/about/harvest.jpg';
+// import teamImg from '../assets/about/team.jpg';
+// import farmImg from '../assets/about/farm.jpg';
+// import packagingImg from '../assets/about/packaging.jpg';
+// import harvestImg from '../assets/about/harvest.jpg';
 
 export const AboutPage: React.FC = () => {
   const { navigate } = useRouter();
@@ -40,12 +40,14 @@ export const AboutPage: React.FC = () => {
     },
   ];
 
+  /*
   const galleryImages = [
     { src: teamImg, alt: 'Infinite 7 Impex core operational and logistics team' },
     { src: farmImg, alt: 'Partner farmer in Maharashtra harvest fields' },
     { src: packagingImg, alt: 'Standardized export carton packaging and sealing' },
     { src: harvestImg, alt: 'Direct farm fresh produce sorted for export' },
   ];
+  */
 
   return (
     <div className="w-full bg-[#FAF7F2]">
@@ -174,8 +176,8 @@ export const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. Team & Operations Gallery */}
-      <section className="py-16 sm:py-24 bg-[#E8DFD2] border-t border-[#D8CDBC]">
+      {/* 5. Team & Operations Gallery - commented out for now since we don't have the images yet*/}
+      {/* <section className="py-16 sm:py-24 bg-[#E8DFD2] border-t border-[#D8CDBC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
           <div className="space-y-2">
             <span className="text-xs font-bold uppercase tracking-widest text-[#C88A2C] block">
@@ -202,7 +204,7 @@ export const AboutPage: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* 6. Bottom CTA: Partner with us */}
       <section className="bg-[#0E2318] py-20 text-white border-t border-[#1C422D]">

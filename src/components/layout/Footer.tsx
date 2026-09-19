@@ -80,18 +80,27 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3.5 text-sm">
               <li className="flex items-start gap-3">
                 <Phone className="w-4 h-4 text-[#D4902A] shrink-0 mt-0.5" />
-                <div>
-                  <a href="tel:+919865993308" className="hover:text-white transition-colors font-medium">
-                    +91 986 599 3308
-                  </a>
-                  <span className="text-xs text-slate-400 block">Mon-Sat, 9am - 7pm IST</span>
+                <div className="space-y-1">
+                  <div>
+                    <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">India Desk</span>
+                    <a href="tel:+918907470541" className="hover:text-white transition-colors font-medium">
+                      +91 89074 70541
+                    </a>
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">UK Desk</span>
+                    <a href="tel:+447442778992" className="hover:text-white transition-colors font-medium">
+                      +44 7442 778992
+                    </a>
+                  </div>
+                  <span className="text-xs text-slate-400 block pt-0.5">Mon-Sat, 9am - 7pm IST / GMT</span>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 text-[#D4902A] shrink-0 mt-0.5" />
                 <div>
-                  <a href="mailto:exports@infinite7impex.com" className="hover:text-white transition-colors font-medium">
-                    exports@infinite7impex.com
+                  <a href="mailto:infinite7impex@gmail.com" className="hover:text-white transition-colors font-medium">
+                    infinite7impex@gmail.com
                   </a>
                   <span className="text-xs text-slate-400 block">response within 24 hours</span>
                 </div>

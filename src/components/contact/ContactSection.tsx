@@ -120,14 +120,26 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 <div className="w-11 h-11 rounded-lg bg-[#153323] text-white flex items-center justify-center shrink-0 shadow-sm">
                   <Phone className="w-5 h-5 text-emerald-400" />
                 </div>
-                <div>
-                  <a
-                    href="tel:+919865993308"
-                    className="text-base font-bold text-[#1A221E] hover:text-[#C88A2C] transition-colors block"
-                  >
-                    +91 986 599 3308
-                  </a>
-                  <span className="text-xs text-slate-500 font-medium">Mon-Sat, 9am - 7pm IST</span>
+                <div className="space-y-1.5">
+                  <div>
+                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">India Desk</span>
+                    <a
+                      href="tel:+918907470541"
+                      className="text-base font-bold text-[#1A221E] hover:text-[#C88A2C] transition-colors block"
+                    >
+                      +91 89074 70541
+                    </a>
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">UK Desk</span>
+                    <a
+                      href="tel:+447442778992"
+                      className="text-base font-bold text-[#1A221E] hover:text-[#C88A2C] transition-colors block"
+                    >
+                      +44 7442 778992
+                    </a>
+                  </div>
+                  <span className="text-xs text-slate-500 font-medium block pt-0.5">Mon-Sat, 9am - 7pm IST / GMT</span>
                 </div>
               </div>
 
@@ -138,10 +150,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 </div>
                 <div>
                   <a
-                    href="mailto:exports@infinite7impex.com"
+                    href="mailto:infinite7impex@gmail.com"
                     className="text-base font-bold text-[#1A221E] hover:text-[#C88A2C] transition-colors block"
                   >
-                    exports@infinite7impex.com
+                    infinite7impex@gmail.com
                   </a>
                   <span className="text-xs text-slate-500 font-medium">response within 24 hours</span>
                 </div>
