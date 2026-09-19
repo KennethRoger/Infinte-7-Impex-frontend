@@ -117,41 +117,50 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
               {/* Phone */}
               <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-lg bg-[#153323] text-white flex items-center justify-center shrink-0 shadow-sm">
+                <div className="w-11 h-11 rounded-lg bg-[#153323] text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
                   <Phone className="w-5 h-5 text-emerald-400" />
                 </div>
-                <div className="space-y-1.5">
+                <div className="space-y-3">
                   <div>
-                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">India Desk</span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#C88A2C] block">
+                      India Desk
+                    </span>
                     <a
                       href="tel:+918907470541"
-                      className="text-base font-bold text-[#1A221E] hover:text-[#C88A2C] transition-colors block"
+                      className="text-base font-bold text-[#1A221E] hover:text-[#C88A2C] transition-colors block mt-0.5"
                     >
                       +91 89074 70541
                     </a>
                   </div>
                   <div>
-                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">UK Desk</span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#C88A2C] block">
+                      UK Desk
+                    </span>
                     <a
                       href="tel:+447442778992"
-                      className="text-base font-bold text-[#1A221E] hover:text-[#C88A2C] transition-colors block"
+                      className="text-base font-bold text-[#1A221E] hover:text-[#C88A2C] transition-colors block mt-0.5"
                     >
                       +44 7442 778992
                     </a>
                   </div>
-                  <span className="text-xs text-slate-500 font-medium block pt-0.5">Mon-Sat, 9am - 7pm IST / GMT</span>
+                  <span className="text-xs text-slate-500 font-medium block">
+                    Mon-Sat, 9am - 7pm IST / GMT
+                  </span>
                 </div>
               </div>
 
               {/* Email */}
               <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-lg bg-[#153323] text-white flex items-center justify-center shrink-0 shadow-sm">
+                <div className="w-11 h-11 rounded-lg bg-[#153323] text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
                   <Mail className="w-5 h-5 text-emerald-400" />
                 </div>
                 <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#C88A2C] block">
+                    Email
+                  </span>
                   <a
                     href="mailto:infinite7impex@gmail.com"
-                    className="text-base font-bold text-[#1A221E] hover:text-[#C88A2C] transition-colors block"
+                    className="text-base font-bold text-[#1A221E] hover:text-[#C88A2C] transition-colors block mt-0.5"
                   >
                     infinite7impex@gmail.com
                   </a>
@@ -159,39 +168,34 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 </div>
               </div>
 
-              {/* India Office (Kollam) */}
+              {/* Offices (India & UK with a single MapPin icon) */}
               <div className="flex items-start gap-4">
                 <div className="w-11 h-11 rounded-lg bg-[#153323] text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
                   <MapPin className="w-5 h-5 text-emerald-400" />
                 </div>
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#C88A2C] block">
-                    India Office
-                  </span>
-                  <p className="text-sm font-semibold text-[#1A221E] leading-snug mt-0.5">
-                    Building 20/1430, 2nd Milestone,
-                  </p>
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                    Kollam - 691094, Kerala, India.
-                  </p>
-                </div>
-              </div>
-
-              {/* UK Office */}
-              <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-lg bg-[#153323] text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                  <MapPin className="w-5 h-5 text-emerald-400" />
-                </div>
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#C88A2C] block">
-                    UK Office
-                  </span>
-                  <p className="text-sm font-semibold text-[#1A221E] leading-snug mt-0.5">
-                    75 Purser Road, Northampton,
-                  </p>
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                    NN1 4PG, United Kingdom.
-                  </p>
+                <div className="space-y-3">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#C88A2C] block">
+                      India Office
+                    </span>
+                    <p className="text-sm font-semibold text-[#1A221E] leading-snug mt-0.5">
+                      Building 20/1430, 2nd Milestone,
+                    </p>
+                    <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                      Kollam - 691094, Kerala, India.
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#C88A2C] block">
+                      UK Office
+                    </span>
+                    <p className="text-sm font-semibold text-[#1A221E] leading-snug mt-0.5">
+                      75 Purser Road, Northampton,
+                    </p>
+                    <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                      NN1 4PG, United Kingdom.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

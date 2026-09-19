@@ -80,61 +80,65 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3.5 text-sm">
               <li className="flex items-start gap-3">
                 <Phone className="w-4 h-4 text-[#D4902A] shrink-0 mt-0.5" />
-                <div className="space-y-1">
+                <div className="space-y-2">
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">India Desk</span>
-                    <a href="tel:+918907470541" className="hover:text-white transition-colors font-medium">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#D4902A] block">
+                      India Desk
+                    </span>
+                    <a href="tel:+918907470541" className="hover:text-white transition-colors font-medium block mt-0.5">
                       +91 89074 70541
                     </a>
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">UK Desk</span>
-                    <a href="tel:+447442778992" className="hover:text-white transition-colors font-medium">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#D4902A] block">
+                      UK Desk
+                    </span>
+                    <a href="tel:+447442778992" className="hover:text-white transition-colors font-medium block mt-0.5">
                       +44 7442 778992
                     </a>
                   </div>
-                  <span className="text-xs text-slate-400 block pt-0.5">Mon-Sat, 9am - 7pm IST / GMT</span>
+                  <span className="text-xs text-slate-400 block">Mon-Sat, 9am - 7pm IST / GMT</span>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 text-[#D4902A] shrink-0 mt-0.5" />
                 <div>
-                  <a href="mailto:infinite7impex@gmail.com" className="hover:text-white transition-colors font-medium">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#D4902A] block">
+                    Email
+                  </span>
+                  <a href="mailto:infinite7impex@gmail.com" className="hover:text-white transition-colors font-medium block mt-0.5">
                     infinite7impex@gmail.com
                   </a>
                   <span className="text-xs text-slate-400 block">response within 24 hours</span>
                 </div>
               </li>
 
-              {/* India Address */}
+              {/* Offices (India & UK with a single MapPin icon) */}
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-[#D4902A] shrink-0 mt-0.5" />
-                <div className="space-y-0.5">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#D4902A] block">
-                    India Office
-                  </span>
-                  <p className="text-xs text-slate-200 leading-relaxed font-medium">
-                    Building 20/1430, 2nd Milestone,
-                  </p>
-                  <p className="text-xs text-slate-400 leading-relaxed">
-                    Kollam - 691094, Kerala, India.
-                  </p>
-                </div>
-              </li>
-
-              {/* UK Address */}
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-[#D4902A] shrink-0 mt-0.5" />
-                <div className="space-y-0.5">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#D4902A] block">
-                    UK Office
-                  </span>
-                  <p className="text-xs text-slate-200 leading-relaxed font-medium">
-                    75 Purser Road, Northampton,
-                  </p>
-                  <p className="text-xs text-slate-400 leading-relaxed">
-                    NN1 4PG, United Kingdom.
-                  </p>
+                <div className="space-y-2">
+                  <div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#D4902A] block">
+                      India Office
+                    </span>
+                    <p className="text-xs text-slate-200 leading-relaxed font-medium mt-0.5">
+                      Building 20/1430, 2nd Milestone,
+                    </p>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      Kollam - 691094, Kerala, India.
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#D4902A] block">
+                      UK Office
+                    </span>
+                    <p className="text-xs text-slate-200 leading-relaxed font-medium mt-0.5">
+                      75 Purser Road, Northampton,
+                    </p>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      NN1 4PG, United Kingdom.
+                    </p>
+                  </div>
                 </div>
               </li>
             </ul>
