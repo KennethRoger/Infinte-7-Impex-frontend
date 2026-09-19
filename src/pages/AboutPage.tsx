@@ -24,19 +24,19 @@ export const AboutPage: React.FC = () => {
 
   const certifications = [
     {
-      title: 'FSSAI',
+      title: 'APEDA & RCMC Registration',
       description:
-        'Food Safety & Standards Authority Of India — Our Processing And Grading Facility Is Licensed For Food-Grade Handling And Export.',
+        'Agricultural & Processed Food Products Export Development Authority (APEDA) with Registration-cum-Membership Certificate (RCMC), authorizing seamless export of scheduled Indian agricultural commodities.',
     },
     {
-      title: 'APEDA',
+      title: 'FSSAI License',
       description:
-        'Agricultural & Processed Food Products Export Development Authority — Authorises Us To Export Scheduled Agricultural Commodities.',
+        'Food Safety & Standards Authority Of India — Our processing, sorting, and packaging facilities comply with rigorous food-grade hygiene and safety standards.',
     },
     {
-      title: 'APEDA',
+      title: 'ISO/IEC 17025 Laboratory',
       description:
-        'All Shipments Are Tested For Pesticide Residue By ISO/IEC 17025 Accredited Laboratories, Ensuring Internationally Recognised Accuracy And Reliability In Every Result.',
+        'All shipments are tested for pesticide residue, moisture, and quality parameters by ISO/IEC 17025 accredited laboratories, ensuring internationally recognized compliance.',
     },
   ];
 
@@ -61,7 +61,7 @@ export const AboutPage: React.FC = () => {
             About Infinite 7 Impex
           </h1>
           <p className="text-[#8ED4AB] text-sm sm:text-base max-w-2xl pt-1 leading-relaxed font-normal">
-            we started with one product, one buyer, and an uncompromising commitment to quality.
+            Founded in 2025 by three friends from Kerala with an uncompromising commitment to quality.
           </p>
         </div>
       </section>
@@ -76,27 +76,28 @@ export const AboutPage: React.FC = () => {
                 OUR STORY
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold font-serif text-[#1A221E] leading-[1.2]">
-                Built on onions, grown on trust.
+                Built on friendship, grown on trust.
               </h2>
             </div>
 
             <div className="space-y-5 text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
               <p>
-                Infinite 7 Impex Was Founded In 2009 By Mr. Kishan Patil In Nashik — Then A Small
-                Trader Supplying Onions To A Single Importer In Colombo, Sri Lanka. The Name Came From
-                A Belief: That Infinite Possibilities Lie In The Simple Act Of Connecting A Farmer To A
-                Buyer, Seven Seas Apart.
+                Infinite 7 Impex was founded in 2025 by three close friends from Kerala — Arjun,
+                Abhi, and Gowri. United by an entrepreneurial drive and a shared passion for India's
+                rich agricultural heritage, they recognized a vital opportunity: creating a transparent,
+                high-standard bridge between genuine Indian farmers and international wholesale buyers.
               </p>
               <p>
-                Our First Shipment Was 18 MT Of Nashik Red Onions. It Arrived 3 Days Late And 2°C Warmer
-                Than Specified. That Experience Drove The Investment In Cold Chain Infrastructure That
-                Now Defines Our Operation. Today, We Export Six Product Categories To 13 Countries,
-                With An Annual Volume Exceeding 50,000 MT. Our Facility In Lasalgaon Processes 500 MT
-                Per Day During Peak Season.
+                What began with a focused export corridor to Sri Lanka quickly expanded into high-demand
+                markets across Singapore and the Middle East, including the UAE, Saudi Arabia, Qatar, and
+                Kuwait. The name <em>Infinite 7 Impex</em> was inspired by a shared conviction: that
+                infinite possibilities unfold when authentic grower roots and international businesses
+                connect seamlessly across the seven seas.
               </p>
               <p>
-                We Remain Privately Held, Operationally Focused, And Structurally Simple: Direct Farm
-                Relationships, Rigorous Grading, And A Single Account Manager For Every Buyer.
+                Today, our operations remain founder-led, quality-obsessed, and customer-centric: direct
+                relationships with prime farming belts, strict grading and lab-tested compliance, and
+                dedicated account coordination for every buyer.
               </p>
             </div>
           </div>
@@ -106,7 +107,7 @@ export const AboutPage: React.FC = () => {
             <div className="rounded-2xl overflow-hidden border border-[#E5DCD1] shadow-sm hover:shadow-md transition-all duration-300 bg-white">
               <img
                 src={onionFounderImg}
-                alt="Founder measuring and inspecting onions at Nashik market"
+                alt="Infinite 7 Impex founders inspecting export-quality produce"
                 className="w-full h-full object-cover min-h-[320px] sm:min-h-[380px]"
                 loading="lazy"
               />

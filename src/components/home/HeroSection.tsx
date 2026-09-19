@@ -34,11 +34,15 @@ export const HeroSection: React.FC = () => {
             <div className="flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium tracking-wide bg-emerald-900/50 text-emerald-300 border border-emerald-600/40 backdrop-blur-sm">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                Export Certified
+                APEDA & RCMC Registered
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium tracking-wide bg-emerald-900/50 text-emerald-300 border border-emerald-600/40 backdrop-blur-sm">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                APEDA Registered
+                FSSAI Licensed
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium tracking-wide bg-emerald-900/50 text-emerald-300 border border-emerald-600/40 backdrop-blur-sm">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                ISO/IEC 17025 Tested
               </span>
             </div>
 

@@ -22,9 +22,9 @@ export const Footer: React.FC = () => {
               buyers across Sri Lanka, Singapore, and global import corridors.
             </p>
             <div className="flex flex-wrap gap-2 text-[10px] uppercase font-bold tracking-wider text-emerald-400">
-              <span className="bg-[#153323] px-2.5 py-1 rounded border border-[#214F35]">APEDA</span>
+              <span className="bg-[#153323] px-2.5 py-1 rounded border border-[#214F35]">APEDA & RCMC</span>
               <span className="bg-[#153323] px-2.5 py-1 rounded border border-[#214F35]">FSSAI</span>
-              <span className="bg-[#153323] px-2.5 py-1 rounded border border-[#214F35]">Phytosanitary</span>
+              <span className="bg-[#153323] px-2.5 py-1 rounded border border-[#214F35]">ISO/IEC 17025</span>
             </div>
           </div>
 
