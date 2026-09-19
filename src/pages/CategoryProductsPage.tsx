@@ -89,7 +89,12 @@ export const CategoryProductsPage: React.FC<CategoryProductsPageProps> = ({ cate
     <div className="w-full bg-[#FAF7F2] min-h-screen">
       {/* 1. Dark Emerald Hero Header */}
       <section className="bg-[#0E2318] text-white py-14 sm:py-18 lg:py-20 border-b border-[#1C422D] relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0E2318] via-[#0E2318]/90 to-transparent z-0" />
+        <div
+          className="absolute inset-0 pointer-events-none z-0"
+          style={{
+            background: 'linear-gradient(to right, #0E2318 0%, rgba(14, 35, 24, 0.9) 50%, rgba(14, 35, 24, 0) 100%)',
+          }}
+        />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           {/* Back link */}
           <div>

@@ -66,7 +66,12 @@ export const ProductsPage: React.FC = () => {
     <div className="w-full bg-[#FAF7F2]">
       {/* 1. Hero Header */}
       <section className="bg-[#0E2318] text-white py-16 sm:py-20 lg:py-24 border-b border-[#1C422D] relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0E2318] via-[#0E2318]/90 to-transparent z-0" />
+        <div
+          className="absolute inset-0 pointer-events-none z-0"
+          style={{
+            background: 'linear-gradient(to right, #0E2318 0%, rgba(14, 35, 24, 0.9) 50%, rgba(14, 35, 24, 0) 100%)',
+          }}
+        />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
           <span className="text-xs font-bold uppercase tracking-widest text-[#22C55E] flex items-center gap-2">
             <Sparkles className="w-3.5 h-3.5 text-[#22C55E]" />
@@ -178,7 +183,12 @@ export const ProductsPage: React.FC = () => {
                       (e.target as HTMLImageElement).src = defaultProduceImg;
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                      background: 'linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%)',
+                    }}
+                  />
                 </div>
 
                 {/* Content Container */}

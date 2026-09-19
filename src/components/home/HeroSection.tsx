@@ -22,7 +22,12 @@ export const HeroSection: React.FC = () => {
           alt="Indian Agricultural Export Warehouse"
           className="w-full h-full object-cover object-center scale-105 transform motion-safe:transition-transform duration-1000"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0E2318] from-30% via-[#0E2318]/60 to-transparent" />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to right, #0E2318 0%, #0E2318 30%, rgba(14, 35, 24, 0) 100%)',
+          }}
+        />
       </div>
 
       {/* Hero Content Container */}
@@ -80,7 +85,13 @@ export const HeroSection: React.FC = () => {
 
           {/* Right Column: In-Demand Produce Preview Card */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="w-full max-w-md bg-slate-900/80 backdrop-blur-md rounded-2xl p-4 border border-white/15 shadow-2xl space-y-3.5 group hover:border-[#C88A2C]/50 transition-all duration-300">
+            <div
+              className="w-full max-w-md bg-white/20 backdrop-blur-md rounded-2xl p-4 border border-white/25 shadow-2xl space-y-3.5 group hover:border-[#C88A2C]/60 transition-all duration-300"
+              style={{
+                WebkitBackdropFilter: 'blur(12px)',
+                backdropFilter: 'blur(12px)',
+              }}
+            >
               {/* Dual image preview */}
               <div className="grid grid-cols-2 gap-2 rounded-xl overflow-hidden h-44 sm:h-48 relative">
                 <img
@@ -100,12 +111,12 @@ export const HeroSection: React.FC = () => {
 
               {/* Card caption */}
               <div className="px-1 pt-1 pb-2">
-                <p className="text-xs sm:text-sm text-slate-200 leading-snug font-medium">
+                <p className="text-xs sm:text-sm text-white leading-snug font-medium drop-shadow-xs">
                   Export-grade red onions &amp; fresh green chillies available now for bulk container bookings.
                 </p>
                 <div
                   onClick={() => handleScrollTo('products')}
-                  className="mt-2.5 inline-flex items-center gap-1.5 text-xs text-[#D4902A] font-semibold hover:text-amber-300 cursor-pointer transition-colors"
+                  className="mt-2.5 inline-flex items-center gap-1.5 text-xs text-amber-300 font-semibold hover:text-white cursor-pointer transition-colors"
                 >
                   <span>Explore produce lines</span>
                   <ArrowRight className="w-3 h-3" />
