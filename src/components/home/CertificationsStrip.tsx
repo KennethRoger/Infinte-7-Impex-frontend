@@ -14,21 +14,21 @@ export const CertificationsStrip: React.FC = () => {
 
         <div className="flex items-center gap-1.5">
           <Award className="w-4 h-4 text-[#C88A2C]" />
-          <span>APEDA / Govt of India</span>
+          <span>APEDA &amp; RCMC Registered</span>
         </div>
 
         <span className="text-[#C88A2C] hidden sm:inline">✦</span>
 
         <div className="flex items-center gap-1.5">
           <CheckCircle className="w-4 h-4 text-[#C88A2C]" />
-          <span>FSSAI Certified</span>
+          <span>FSSAI Licensed</span>
         </div>
 
         <span className="text-[#C88A2C] hidden sm:inline">✦</span>
 
         <div className="flex items-center gap-1.5">
           <FileCheck className="w-4 h-4 text-[#C88A2C]" />
-          <span>Issued Phytosanitary Certificate</span>
+          <span>ISO/IEC 17025 Tested</span>
         </div>
       </div>
     </div>
