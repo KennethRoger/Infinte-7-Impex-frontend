@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, PackageOpen, RefreshCw, AlertCircle, Sparkles } from 'lucide-react';
-import { useRouter, Link } from '../context/RouterContext';
+import { useRouter } from '../context/RouterContext';
 import { CategoryApiService } from '../services/category.service';
 import { useToast } from '../context/ToastContext';
 import type { ProductCategory } from '../types/category';
@@ -43,6 +43,23 @@ export const ProductsPage: React.FC = () => {
   const handleBrowseCategory = (category: ProductCategory) => {
     const slug = category.name.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-');
     navigate(`/products/${slug}`);
+  };
+
+  const handleScrollToQuote = () => {
+    navigate('/#get-quote');
+    setTimeout(() => {
+      const element = document.getElementById('get-quote');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        // Pre-fill message textarea if present
+        const textarea = document.querySelector<HTMLTextAreaElement>('#get-quote textarea');
+        if (textarea) {
+          textarea.value =
+            'Hello Infinite 7 Impex, I am interested in requesting a custom quote for agricultural produce export. Please share CIF pricing, available consignments, and specifications.';
+          textarea.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+      }
+    }, 120);
   };
 
   return (
@@ -123,13 +140,14 @@ export const ProductsPage: React.FC = () => {
             </div>
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link
-                href="/#get-quote"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#00A859] hover:bg-[#008f4c] text-white text-xs sm:text-sm font-semibold px-6 py-3 rounded-lg shadow-sm transition-all"
+              <button
+                type="button"
+                onClick={handleScrollToQuote}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#00A859] hover:bg-[#008f4c] text-white text-xs sm:text-sm font-semibold px-6 py-3 rounded-lg shadow-sm transition-all cursor-pointer"
               >
                 <span>Request Custom Quote</span>
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </button>
               <button
                 type="button"
                 onClick={fetchCategories}
