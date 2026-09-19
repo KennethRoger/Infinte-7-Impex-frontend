@@ -21,7 +21,6 @@ export const AdminDashboardPage: React.FC = () => {
       description: 'Review lead inquiries, contact details, and priority follow-ups from the website form.',
       href: '/admin/customers',
       icon: Users,
-      badgeText: 'Active',
       color: '#00A859',
     },
     {
@@ -29,7 +28,6 @@ export const AdminDashboardPage: React.FC = () => {
       description: 'Organize produce categories like Fresh Vegetables, Condiments, and Packed Food.',
       href: '/admin/categories',
       icon: FolderTree,
-      badgeText: 'Configured',
       color: '#C88A2C',
     },
     {
@@ -37,7 +35,6 @@ export const AdminDashboardPage: React.FC = () => {
       description: 'Manage export-grade produce listings, packaging specs, certifications, and image galleries.',
       href: '/admin/products',
       icon: Package,
-      badgeText: 'Configured',
       color: '#2563EB',
     },
     {
@@ -45,7 +42,6 @@ export const AdminDashboardPage: React.FC = () => {
       description: 'Publish export market intelligence articles with structured sections and market insights.',
       href: '/admin/blogs',
       icon: BookOpen,
-      badgeText: 'Configured',
       color: '#7C3AED',
     },
   ];
@@ -100,9 +96,6 @@ export const AdminDashboardPage: React.FC = () => {
                     <div className="w-10 h-10 rounded-lg bg-[#FAF7F2] border border-[#E7DFD3] flex items-center justify-center text-[#C88A2C] group-hover:scale-110 transition-transform">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
-                      {section.badgeText}
-                    </span>
                   </div>
 
                   <div>

@@ -131,12 +131,11 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ isOpen, onClose }) =
             </span>
           </div>
 
-          <button
-            type="button"
-            onClick={() => {
-              navigate('/');
-              onClose();
-            }}
+          <a
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onClose}
             className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white hover:bg-[#163825] transition-colors cursor-pointer"
           >
             <span className="flex items-center gap-3">
@@ -146,7 +145,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ isOpen, onClose }) =
             <span className="text-[10px] text-emerald-400 font-semibold bg-[#163825] px-1.5 py-0.5 rounded">
               Live
             </span>
-          </button>
+          </a>
         </div>
 
         {/* 3. Footer: Admin Profile & Signout Button */}
