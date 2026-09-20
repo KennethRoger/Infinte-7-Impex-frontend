@@ -36,7 +36,7 @@ const AppContent: React.FC = () => {
     }
   }, [isLoading, currentPath, isAuthenticated, navigate]);
 
-  // Dynamic SEO Page Titles
+  // Dynamic SEO Page Titles, Canonical Tags & Meta
   React.useEffect(() => {
     let title = 'Infinite 7 Impex | Indian Agricultural Produce & Commodities Exporter';
     if (currentPath === '/products') {
@@ -57,6 +57,38 @@ const AppContent: React.FC = () => {
       title = 'Admin Management Portal | Infinite 7 Impex';
     }
     document.title = title;
+
+    // 1. Dynamic Canonical Tag
+    const baseUrl = 'https://www.infinite7impex.com';
+    const canonicalUrl = currentPath === '/' ? `${baseUrl}/` : `${baseUrl}${currentPath}`;
+    let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', canonicalUrl);
+
+    // 2. Dynamic Open Graph URL
+    let ogUrl = document.querySelector('meta[property="og:url"]') as HTMLMetaElement | null;
+    if (!ogUrl) {
+      ogUrl = document.createElement('meta');
+      ogUrl.setAttribute('property', 'og:url');
+      document.head.appendChild(ogUrl);
+    }
+    ogUrl.setAttribute('content', canonicalUrl);
+
+    // 3. Prevent indexing of private admin portal routes
+    let robotsMeta = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
+    if (currentPath.startsWith('/admin')) {
+      if (robotsMeta) {
+        robotsMeta.setAttribute('content', 'noindex, nofollow');
+      }
+    } else {
+      if (robotsMeta) {
+        robotsMeta.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+      }
+    }
   }, [currentPath]);
 
   // 1. Admin Portal Routing
