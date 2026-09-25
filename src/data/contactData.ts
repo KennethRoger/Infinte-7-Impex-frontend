@@ -10,6 +10,12 @@ export interface OfficeAddress {
   line2: string;
 }
 
+export interface SocialLinks {
+  linkedin: string;
+  instagram: string;
+  facebook: string;
+}
+
 export interface ContactData {
   title: string;
   phones: DeskPhone[];
@@ -21,6 +27,7 @@ export interface ContactData {
     note: string;
   };
   offices: OfficeAddress[];
+  socials: SocialLinks;
 }
 
 export const CONTACT_INFO: ContactData = {
@@ -56,4 +63,9 @@ export const CONTACT_INFO: ContactData = {
       line2: 'NN1 4PG, United Kingdom.',
     },
   ],
+  socials: {
+    linkedin: 'https://www.linkedin.com/in/infinite7impex/',
+    instagram: 'https://www.instagram.com/infinite7impex/',
+    facebook: 'https://www.facebook.com/profile.php?id=61594447148031',
+  },
 };
